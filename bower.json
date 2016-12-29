@@ -1,0 +1,21 @@
+{
+  "name": "tcp-panel-dev",
+  "description": "",
+  "main": "start.js",
+  "authors": [
+    "MSc. Günalp Uysal"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1"
+  }
+}

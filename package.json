@@ -1,0 +1,40 @@
+{
+  "name": "tcp-panel-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MEAN",
+    "Express",
+    "Angular",
+    "Bower",
+    "Gulp"
+  ],
+  "author": "MSc. Günalp Uysal",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "browserify": "^13.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.2.0",
+    "helmet": "^3.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-inject": "^4.0.0",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-order": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-clean": "^0.3.2",
+    "main-bower-files": "^2.11.1",
+    "nodemon": "^1.9.2"
+  }
+}

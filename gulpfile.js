@@ -88,7 +88,6 @@ pipes.builtIndex = function() {
 gulp.task('clean-app', pipes.cleanDest);
 gulp.task('build-app', ['clean-app'], pipes.builtIndex);
 
-
 gulp.task('watch', ['build-app'], function() {
   
   gulp.watch(paths.index, function() {

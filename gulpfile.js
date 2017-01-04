@@ -31,15 +31,15 @@ pipes.builtAppStyles = function() {
 pipes.builtVendorStyles = function() {
   return gulp.src(mainBowerFiles('**/*.css'))
     .pipe(plugins.concat('vendor.css'))
-    .pipe(gulp.dest(paths.dest));
+    .pipe(gulp.dest(paths.dest+"/assets/css"));
 };
 
 pipes.builtVendorScripts = function() {
   return gulp.src(mainBowerFiles('**/*.js'))
-    .pipe(pipes.orderVendorScripts())
+    .pipe(plugins.order(['jquery.min.js', 'angular.min.js','angular-route.min.js','bootstrap.min.js']))
     .pipe(plugins.concat('vendor.js'))
     // .pipe(plugins.uglify())
-    .pipe(gulp.dest(paths.dest));
+    .pipe(gulp.dest(paths.dest+"/assets/js"));
 };
 
 //built app cripts
@@ -53,12 +53,12 @@ pipes.builtAppScripts = function() {
 
 //order vendor scripts
 pipes.orderVendorScripts = function() {
-  return plugins.order(['jquery.js', 'angular.js']);
+  return plugins.order(['jquery.min.js', 'angular.min.js','angular-route.min.js','bootstrap.min.js']);
 };
 
-//put index.js into first order
+//put app.js into first order
 pipes.orderAppScripts = function() {
-  return plugins.order(['view/src/index.js', paths.scripts]);
+  return plugins.order(['view/src/app/app.js', paths.scripts]);
 };
 
 //copy bower-components into app folder
@@ -86,9 +86,9 @@ pipes.builtIndex = function() {
 };
 
 gulp.task('clean-app', pipes.cleanDest);
-gulp.task('build-app', ['clean-app'], pipes.builtIndex);
+gulp.task('default', ['clean-app'], pipes.builtIndex);
 
-gulp.task('watch', ['build-app'], function() {
+gulp.task('watch', ['default'], function() {
   
   gulp.watch(paths.index, function() {
     return pipes.builtIndex();

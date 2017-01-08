@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="shortcut icon" href="components/image/favicon.png" type="image/x-icon" />
     <!-- bowercss:css -->
     <!-- bower installed css will go here... -->
     <!-- endinject -->
+    <!-- inject:css -->
+    <!-- app.css installed scripts will go here... -->
+    <!-- endinject -->
 </head>
 <body ng-app="myApp">
+
+<div class="login-page">
+    <div class="container">
+        <div class="form-signin">
+            <h2 class="form-signin-heading">
+                Lütfen, Giriş Yapın
+            </h2>
+            <label for="inputUsername" class="sr-only">Email address</label>
+            <input type="username" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <a class="btn btn-lg btn-primary btn-block" type="submit">Sign in</a>
+        </div>
+    </div>
+</div>
 
 </body>
 <!-- bowerjs:js -->

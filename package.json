@@ -23,7 +23,9 @@
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-inject": "^4.2.0",
-    "helmet": "^3.2.0"
+    "gulp-sass": "^3.0.0",
+    "helmet": "^3.2.0",
+    "i18next": "^4.1.4"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

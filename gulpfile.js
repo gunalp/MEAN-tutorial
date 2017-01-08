@@ -1,13 +1,15 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var plugins = require('gulp-load-plugins')();
 var mainBowerFiles = require('main-bower-files');
 
 var paths = {
-  scripts: 'view/src/**/*.js',
-  styles: ['view/src/**/*.{css,scss}'],
-  index: 'view/src/index.html',
-  partials: ['view/src/**/*.html', '!view/src/index.html'],
-  dest: './view/dest'
+  image     :   'view/src/components/image/*.png',
+  scripts   :   'view/src/**/*.js',
+  styles    :   ['view/src/components/scss/*.scss'],
+  index     :   'view/src/index.html',
+  partials  :   ['view/src/**/*.html', '!view/src/index.html'],
+  dest      :   './view/dest'
 };
 
 var pipes = {};
@@ -17,21 +19,24 @@ pipes.cleanDest = function () {
     .pipe(plugins.clean());
 };
 
-pipes.builtPartialScripts = function() {
-  return gulp.src(paths.partials)
-    .pipe(gulp.dest(paths.dest));
+pipes.builtAppImage = function () {
+  return gulp.src(paths.image)
+    .pipe(gulp.dest(paths.dest+"/components/image"));
 };
 
 pipes.builtAppStyles = function() {
   return gulp.src(paths.styles)
+    .pipe(sass({})).on('error',function (error) {
+      console.log('\n', error.messageFormatted)
+    })
     .pipe(plugins.concat('app.css'))
-    .pipe(gulp.dest(paths.dest));
+    .pipe(gulp.dest(paths.dest+"/components/css"));
 };
 
 pipes.builtVendorStyles = function() {
   return gulp.src(mainBowerFiles('**/*.css'))
     .pipe(plugins.concat('vendor.css'))
-    .pipe(gulp.dest(paths.dest+"/assets/css"));
+    .pipe(gulp.dest(paths.dest+"/components/css"));
 };
 
 pipes.builtVendorScripts = function() {
@@ -39,10 +44,9 @@ pipes.builtVendorScripts = function() {
     .pipe(plugins.order(['jquery.min.js', 'angular.min.js','angular-route.min.js','bootstrap.min.js']))
     .pipe(plugins.concat('vendor.js'))
     // .pipe(plugins.uglify())
-    .pipe(gulp.dest(paths.dest+"/assets/js"));
+    .pipe(gulp.dest(paths.dest+"/components/js"));
 };
 
-//built app cripts
 pipes.builtAppScripts = function() {
   return gulp.src(paths.scripts)
     .pipe(pipes.orderAppScripts())
@@ -51,17 +55,19 @@ pipes.builtAppScripts = function() {
     .pipe(gulp.dest(paths.dest));
 };
 
-//order vendor scripts
 pipes.orderVendorScripts = function() {
   return plugins.order(['jquery.min.js', 'angular.min.js','angular-route.min.js','bootstrap.min.js']);
 };
 
-//put app.js into first order
 pipes.orderAppScripts = function() {
   return plugins.order(['view/src/app/app.js', paths.scripts]);
 };
 
-//copy bower-components into app folder
+pipes.builtPartialScripts = function() {
+  return gulp.src(paths.partials)
+    .pipe(gulp.dest(paths.dest));
+};
+
 pipes.bowerFiles = function() {
   return gulp.src(mainBowerFiles())
     .pipe(gulp.dest(paths.dest + '/bower_components'));
@@ -73,6 +79,7 @@ pipes.builtIndex = function() {
   var vendorScripts = pipes.builtVendorScripts();
   var appScripts = pipes.builtAppScripts();
   var appStyles = pipes.builtAppStyles();
+  var appImage = pipes.builtAppImage();
   pipes.builtPartialScripts();
   
   return gulp.src('view/src/index.html')
@@ -105,5 +112,4 @@ gulp.task('watch', ['default'], function() {
   gulp.watch(paths.partials, function() {
     return pipes.builtPartialScripts();
   });
-  
 });

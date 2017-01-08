@@ -1,7 +1,7 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var helmet = require('helmet');
+var express       = require('express');
+var bodyParser    = require('body-parser');
+var cookieParser  = require('cookie-parser');
+var helmet        = require('helmet');
 
 var app = express();
 
@@ -21,7 +21,7 @@ module.exports = function (callback) {
     }
     next();
   });
-  
+    
   callback(app);
   
   app.listen(5000, function(){
